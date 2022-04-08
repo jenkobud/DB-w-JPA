@@ -1,17 +1,15 @@
 package com.learning.DBwJPA.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name="profesor")
 public class Profesor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre, Apellido;
+    private String nombre, apellido;
     private Date fecha_nacimiento;
     private float salario;
 
@@ -20,16 +18,27 @@ public class Profesor {
     public Profesor(Long id, String nombre, String apellido, Date fecha_nacimiento, float salario) {
         this.id = id;
         this.nombre = nombre;
-        Apellido = apellido;
+        this.apellido = apellido;
         this.fecha_nacimiento = fecha_nacimiento;
         this.salario = salario;
     }
 
     public Profesor(String nombre, String apellido, Date fecha_nacimiento, float salario) {
         this.nombre = nombre;
-        Apellido = apellido;
+        this.apellido = apellido;
         this.fecha_nacimiento = fecha_nacimiento;
         this.salario = salario;
+    }
+
+    @Override
+    public String toString() {
+        return "Profesor{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", Apellido='" + apellido + '\'' +
+                ", fecha_nacimiento=" + fecha_nacimiento +
+                ", salario=" + salario +
+                '}';
     }
 
     public String getNombre() {
@@ -41,11 +50,11 @@ public class Profesor {
     }
 
     public String getApellido() {
-        return Apellido;
+        return apellido;
     }
 
     public void setApellido(String apellido) {
-        Apellido = apellido;
+        this.apellido = apellido;
     }
 
     public Date getFecha_nacimiento() {

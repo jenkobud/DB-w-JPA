@@ -1,5 +1,8 @@
 package com.learning.DBwJPA;
 
+import com.learning.DBwJPA.entity.Curso;
+import com.learning.DBwJPA.repositorio.CursoRepositorio;
+import com.learning.DBwJPA.repositorio.EstudianteRepositorio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.learning.DBwJPA.entity.Profesor;
@@ -19,14 +22,38 @@ public class DbWJpaApplication {
 		SpringApplication.run(DbWJpaApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner demo(ProfesorRepositorio profesorR) {
+	public CommandLineRunner demo(ProfesorRepositorio profesorR, CursoRepositorio cursoR, EstudianteRepositorio estudianteR) {
 		return (args) -> {
 			// save a few customers
-			profesorR.save(new Profesor("Jack", "Bauer", new Date(System.currentTimeMillis()), 1000));
-			profesorR.save(new Profesor("Chloe O", "Brian", new Date(System.currentTimeMillis()), 2000));
-			profesorR.save(new Profesor("Kim", "Bauer", new Date(System.currentTimeMillis()), 10020));
+			Profesor profesor1 = new Profesor("Jack", "Bauer", new Date(System.currentTimeMillis()), 1000);
+			Profesor profesor2 = new Profesor("Chloe O", "Brian", new Date(System.currentTimeMillis()), 2000);
+			Profesor profesor3 = new Profesor("Kim", "Bauer", new Date(System.currentTimeMillis()), 10020);
+
+			profesorR.save(profesor1);
+			profesorR.save(profesor2);
+			profesorR.save(profesor3);
 			profesorR.save(new Profesor("David", "Palmer", new Date(System.currentTimeMillis()), 1220));
 			profesorR.save(new Profesor("Michelle", "Dessler", new Date(System.currentTimeMillis()), 20020));
+			Curso cursoA = new Curso("Algo1","Algo1","Noche",30,profesor1);
+			Curso cursoB = new Curso("Algo2","Algo2","Tarde",40,profesor1);
+			Curso cursoC = new Curso("Mate","Mate ma","Noche",6,profesor2);
+			Curso cursoD= new Curso("Algebra","Algebra","Noche",50,profesor2);
+			Curso cursoE = new Curso("Chino","Chino","Tarde",60,profesor2);
+
+			cursoR.save(cursoA);
+			cursoR.save(cursoB);
+			cursoR.save(cursoC);
+			cursoR.save(cursoD);
+			cursoR.save(cursoE);
+
+
+			//Mostrar curso por profesor asignado.
+			log.info("Customers found with findByProfesor_Id( id ):");
+			log.info("-------------------------------");
+			for(Curso c : cursoR.findByProfesor_Id(1L)){
+				log.info(c.toString());
+			}
+
 
 			// fetch all customers
 			log.info("Customers found with findAll():");
@@ -47,12 +74,13 @@ public class DbWJpaApplication {
 			log.info("Customer found with findByLastName('Bauer'):");
 			log.info("--------------------------------------------");
 			//Cambiar a funcion que haya en profesor entity.
-			profesorR.findByLastName("Bauer").forEach(bauer -> {
-				log.info(bauer.toString());
-			});
-			// for (Customer bauer : repository.findByLastName("Bauer")) {
-			//  log.info(bauer.toString());
-			// }
+			//profesorR.findByNombreContaining("i").forEach(iContain -> {
+			//	log.info(iContain.toString());
+			//});
+
+			for (Profesor iContain : profesorR.findByNombreContaining("i")) {
+			  log.info(iContain.toString());
+			}
 			log.info("");
 		};
 	}

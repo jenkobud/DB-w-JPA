@@ -10,6 +10,6 @@ public interface ProfesorRepositorio extends CrudRepository<Profesor, Long> {
     Profesor findByNombre(String n);
     //Lista trae todo registro que coincida.
     List<Profesor> findAllByNombre(String n);
-    List<Profesor> findByNombreContaining(String char_a_contener);
+    List<Profesor> findByNombreContaining(String substring);
 
 }
