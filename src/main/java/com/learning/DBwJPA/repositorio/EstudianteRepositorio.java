@@ -8,4 +8,5 @@ import java.util.List;
 public interface EstudianteRepositorio extends CrudRepository<Estudiante, Long> {
     List<Estudiante> findAllByCarreraOrderByApellido(String carrera);
     //List<Estudiante> findByCursoNombreOrderByApellido(String cursoNombre);
+
 }

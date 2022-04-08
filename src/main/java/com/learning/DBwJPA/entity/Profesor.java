@@ -2,6 +2,7 @@ package com.learning.DBwJPA.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="profesor")
@@ -12,6 +13,9 @@ public class Profesor {
     private String nombre, apellido;
     private Date fecha_nacimiento;
     private float salario;
+    @OneToMany(mappedBy = "profesor") // mappedBy tiene que ser igual a foreign en la otra tabla
+    protected List<Curso> cursosPorProfesor;
+
 
     protected Profesor() {}
 

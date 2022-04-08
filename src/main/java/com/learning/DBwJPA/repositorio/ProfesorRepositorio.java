@@ -11,5 +11,5 @@ public interface ProfesorRepositorio extends CrudRepository<Profesor, Long> {
     //Lista trae todo registro que coincida.
     List<Profesor> findAllByNombre(String n);
     List<Profesor> findByNombreContaining(String substring);
-
+    Profesor findByCursosPorProfesor_Nombre(String nombreCurso);
 }

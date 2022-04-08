@@ -12,7 +12,7 @@ public class Curso {
     protected Integer cupo;
     //Mapea y toma a profesor como "foreign key".
     @ManyToOne
-    @JoinColumn(name="PROFESOR_ID", nullable=true)
+    @JoinColumn(name="PROFESOR_TYPE_ID", nullable=true) //name -> lo que quieras
     protected Profesor profesor;
 
     protected Curso() {}
